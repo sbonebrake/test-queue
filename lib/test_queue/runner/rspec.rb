@@ -15,7 +15,15 @@ module TestQueue
     class RSpec < Runner
       def initialize
         @rspec = ::RSpec::Core::QueueRunner.new
-        super(@rspec.example_groups.sort_by{ |s| -(stats[s.to_s] || 0) })
+        @split_groups = ENV['TEST_QUEUE_SPLIT_GROUPS'] && ENV['TEST_QUEUE_SPLIT_GROUPS'].strip.downcase == 'true'
+        if @split_groups
+          groups = @rspec.example_groups
+          queue = groups.map(&:descendant_filtered_examples).flatten.sort_by{ |s| -(stats[s.id] || 0) }
+        else
+          queue = @rspec.example_groups.sort_by{ |s| -(stats[s.to_s] || 0) }
+        end
+
+        super(queue)
       end
 
       def run_worker(iterator)
