@@ -20,6 +20,7 @@ module TestQueue
 
       while true
         client = connect_to_master('POP')
+
         break if client.nil?
         r, w, e = IO.select([client], nil, [client], nil)
         break if !e.empty?
@@ -29,13 +30,13 @@ module TestQueue
           item = Marshal.load(data)
           break if item.nil? || item.empty?
           suite = @suites[item]
-
+          example = suite.descendant_filtered_examples.find { |ex| ex.id == item }
           $0 = "#{@procline} - #{suite.respond_to?(:description) ? suite.description : suite}"
           start = Time.now
           if @filter
-            @filter.call(suite){ yield suite }
+            @filter.call(example){ yield example }
           else
-            yield suite
+            yield example
           end
           @stats[suite.to_s] = Time.now - start
         else

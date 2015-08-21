@@ -28,9 +28,12 @@ module RSpec::Core
     def run_specs(iterator)
       @configuration.reporter.report(@world.ordered_example_groups.count) do |reporter|
         @configuration.with_suite_hooks do
-          iterator.map { |g|
-            print "    #{g.description}: "
+          iterator.map { |ex|
+            print "    #{ex.full_description}: "
             start = Time.now
+            ::RSpec.world.filtered_examples.clear
+            g = ex.example_group
+            ::RSpec.world.filtered_examples[g] = [ex]
             ret = g.run(reporter)
             diff = Time.now-start
             puts("  <%.3f>" % diff)

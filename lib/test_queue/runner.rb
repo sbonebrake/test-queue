@@ -35,9 +35,15 @@ module TestQueue
       end
 
       @procline = $0
-      @queue = queue
-      @suites = queue.inject(Hash.new){ |hash, suite| hash.update suite.to_s => suite }
-
+      # Find all descendant_filtered_examples and put them in the queue
+      @test_cases = {}
+      queue.each do |example_group|
+        example_group.descendant_filtered_examples.each do |example|
+          @test_cases[example.id] = example_group
+        end
+      end
+      @queue = @test_cases.keys
+      @suites = @test_cases
       @workers = {}
       @completed = []
 
