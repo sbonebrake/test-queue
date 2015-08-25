@@ -18,7 +18,11 @@ module TestQueue
         @split_groups = ENV['TEST_QUEUE_SPLIT_GROUPS'] && ENV['TEST_QUEUE_SPLIT_GROUPS'].strip.downcase == 'true'
         if @split_groups
           groups = @rspec.example_groups
-          queue = groups.map(&:descendant_filtered_examples).flatten.sort_by{ |s| -(stats[s.id] || 0) }
+          groups_to_split = groups.select { |group| group.metadata[:no_split] != true }
+          queue = groups_to_split.map(&:descendant_filtered_examples).flatten
+          groups_to_keep = groups.reject { |group| group.metadata[:no_split] != true }
+          queue.concat groups_to_keep
+          queue.sort_by!{ |s| -(stats[s.id] || 0) }
         else
           queue = @rspec.example_groups.sort_by{ |s| -(stats[s.to_s] || 0) }
         end
