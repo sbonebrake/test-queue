@@ -1,3 +1,9 @@
+#### v0.3.2 2015-08-31
+
+- [82c09e3](https://github.com/sbonebrake/test-queue/commit/82c09e361dca5b1d23daa2f440c5b51503ddba75) Release 0.3.2
+- [90bf4af](https://github.com/sbonebrake/test-queue/commit/90bf4af310da62a6ac5a46c1c8fb6f70207eca2d) Fix cucumber support
+
+
 #### v0.3.1 2015-08-31
 
 - [bc48cdc](https://github.com/sbonebrake/test-queue/commit/bc48cdc0aa36adaee2c499be2563fef9fc92cfe9) Release 0.3.1
