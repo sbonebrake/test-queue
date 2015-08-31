@@ -1,4 +1,4 @@
-## test-queue
+## test-queue-split
 
 [![Gem Version](https://badge.fury.io/rb/test-queue-split.svg)](https://rubygems.org/gems/test-queue-split)
 
