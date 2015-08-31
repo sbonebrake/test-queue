@@ -1,3 +1,10 @@
+#### v0.3.1 2015-08-31
+
+- [bc48cdc](https://github.com/sbonebrake/test-queue/commit/bc48cdc0aa36adaee2c499be2563fef9fc92cfe9) Release 0.3.1
+- [6962d65](https://github.com/sbonebrake/test-queue/commit/6962d6534aceb29518a31312ba452fad8457f3c1) Add gem badge
+- [efac9f8](https://github.com/sbonebrake/test-queue/commit/efac9f8d48f5e7b08cdb1f3409868319c728c031) Add option to split example groups to individual examples before putting on the queue for rspec.
+
+
 #### v0.3.0 2015-08-31
 
 - [99119ad](https://github.com/sbonebrake/test-queue/commit/99119ad91d738d6ad4e421294c40739c3fd65bcd) Release 0.3.0
